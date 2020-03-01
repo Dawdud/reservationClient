@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
-
-export default class RegisterForm extends Component {
+import { connect } from "react-redux";
+import { signUp } from "../../store/actions/authActions";
+class RegisterForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,20 +15,7 @@ export default class RegisterForm extends Component {
   }
   handleSubmit = e => {
     e.preventDefault();
-
-    const { name: name, email, password } = this.state;
-
-    axios
-      .post("http://localhost:8080/register", {
-        name,
-        email,
-        password
-      })
-      .then(result => {
-        if (result.status === 201) {
-          this.setState({ isRegistered: true });
-        }
-      });
+    this.props.signUp(this.state);
   };
   handleChange(event) {
     console.log(event.target.name);
@@ -36,7 +23,6 @@ export default class RegisterForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
   render() {
-    const { name: name, email, password } = this.state;
     let greeting;
     if (this.state.isRegistered) {
       greeting = (
@@ -46,34 +32,50 @@ export default class RegisterForm extends Component {
       greeting = "";
     }
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-          ></input>
-
-          <input
-            type="text"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          ></input>
-
-          <input
-            type="text"
-            name="password"
-            id="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          ></input>
-          <button>Send data!</button>
-        </form>
-        <div>{greeting}</div>
+      <div className="contaner">
+        <div className="row">
+          <form onSubmit={this.handleSubmit}>
+            <div className="input-field col s12">
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              ></input>
+              <label htmlFor="name">Name</label>
+            </div>
+            <div className="input-field col s12">
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              ></input>
+              <label htmlFor="name">Email</label>
+            </div>
+            <div className="input-field col s12">
+              <input
+                type="text"
+                name="password"
+                id="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              ></input>
+              <label htmlFor="password">Password</label>
+            </div>
+            <button>Send data!</button>
+          </form>
+          <div>{greeting}</div>
+        </div>
       </div>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: newUser => dispatch(signUp(newUser))
+  };
+};
+export default connect(null, mapDispatchToProps)(RegisterForm);

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import { signIn } from "../../store/actions/authActions";
 class SignIn extends Component {
   constructor() {
     super();
@@ -15,9 +16,9 @@ class SignIn extends Component {
     console.log(e);
   };
   handleSubmit = e => {
-    console.log(e);
+    this.props.signIn(this.state);
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
   };
   render() {
     return (
@@ -41,4 +42,9 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: creds => dispatch(signIn(creds))
+  };
+};
+export default connect(null, mapDispatchToProps)(SignIn);

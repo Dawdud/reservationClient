@@ -20,11 +20,6 @@ export default class PersonList extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <p>New message</p>
-        <p>{this.state.users.map(item => item.id)}</p>
-      </div>
-    );
+    return <div></div>;
   }
 }
