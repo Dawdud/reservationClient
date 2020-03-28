@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
-class RegisterForm extends Component {
+import { createReservation } from "../../store/actions/reservationActions";
+class CreateReservation extends Component {
   constructor() {
     super();
     this.state = {
       name: "",
-      email: "",
-      password: "",
-      isRegistered: false
+      description: "",
+      startdate: "",
+      enddate: "",
+      guests: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit = e => {
     e.preventDefault();
-    this.props.signUp(this.state);
+    this.props.createReservation(this.state);
   };
   handleChange(event) {
     console.log(event.target.name);
@@ -34,7 +36,7 @@ class RegisterForm extends Component {
     return (
       <div className="contaner">
         <div className="row">
-          <h5>Register</h5>
+          <h5>Reservation</h5>
           <form onSubmit={this.handleSubmit}>
             <div className="input-field col s12">
               <input
@@ -49,23 +51,43 @@ class RegisterForm extends Component {
             <div className="input-field col s12">
               <input
                 type="text"
-                name="email"
-                value={this.state.email}
+                name="description"
+                value={this.state.description}
                 onChange={this.handleChange}
               ></input>
-              <label htmlFor="name">Email</label>
+              <label htmlFor="name">description</label>
             </div>
             <div className="input-field col s12">
               <input
-                type="text"
-                name="password"
-                id="password"
-                value={this.state.password}
+                type="date"
+                name="startdate"
+                id="startdate"
+                value={this.state.startdate}
                 onChange={this.handleChange}
               ></input>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">startDate</label>
             </div>
-            <button>Send data!</button>
+            <div className="input-field col s12">
+              <input
+                type="date"
+                name="enddate"
+                id="enddate"
+                value={this.state.enddate}
+                onChange={this.handleChange}
+              ></input>
+              <label htmlFor="enddate">endDate</label>
+            </div>
+            <div className="input-field col s12">
+              <input
+                type="number"
+                name="guests"
+                id="guests"
+                value={this.state.guests}
+                onChange={this.handleChange}
+              ></input>
+              <label htmlFor="guests">guest number</label>
+            </div>
+            <button>Accept reservation</button>
           </form>
           <div>{greeting}</div>
         </div>
@@ -76,7 +98,7 @@ class RegisterForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUp: newUser => dispatch(signUp(newUser))
+    createReservation: newUser => dispatch(createReservation(newUser))
   };
 };
-export default connect(null, mapDispatchToProps)(RegisterForm);
+export default connect(null, mapDispatchToProps)(CreateReservation);
