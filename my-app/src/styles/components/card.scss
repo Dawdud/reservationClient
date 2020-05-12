@@ -1,0 +1,20 @@
+@import "../utils/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 90vh;
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: $third-color;
+    width: 20em;
+    height: 23em;
+    border-radius: 8px;
+  }
+}

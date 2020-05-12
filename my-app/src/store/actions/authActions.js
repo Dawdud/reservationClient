@@ -1,27 +1,32 @@
 import axios from "axios";
-export const signIn = credentials => {
+
+export const signIn = (credentials, props) => {
   return (dispatch, getstate) => {
     axios
       .post("http://localhost:8080/login", credentials)
-      .then(res => {
+      .then((res) => {
         console.log(res);
+        let userID = res.data.userId;
+        localStorage.setItem("user", res.data.token);
+        localStorage.setItem("userID", userID);
+        props.history.push("/");
         dispatch({ type: "LOGIN_SUCCESS" });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         dispatch({ type: "LOGIN_ERROR", err });
       });
   };
 };
 
-export const signUp = newUser => {
+export const signUp = (newUser) => {
   return (dispatch, getstate) => {
     axios
       .post("http://localhost:8080/register", newUser)
-      .then(result => {
+      .then((result) => {
         dispatch({ type: "SIGNUP_SUCCESS" });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         dispatch({ type: "SIGNUP_ERROR", err });
       });

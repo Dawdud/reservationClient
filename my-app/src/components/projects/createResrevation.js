@@ -10,18 +10,21 @@ class CreateReservation extends Component {
       description: "",
       startdate: "",
       enddate: "",
-      guests: ""
+      guests: "",
+      userId: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
+
     this.props.createReservation(this.state);
   };
   handleChange(event) {
     console.log(event.target.name);
     //  this.setState({ value: event.target.value });
+
     this.setState({ [event.target.name]: event.target.value });
   }
   render() {
@@ -96,9 +99,13 @@ class CreateReservation extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    createReservation: newUser => dispatch(createReservation(newUser))
+    createReservation: (reservation) =>
+      dispatch(createReservation(reservation)),
   };
 };
-export default connect(null, mapDispatchToProps)(CreateReservation);
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateReservation);
