@@ -20,3 +20,21 @@ export const createReservation = (reservation) => {
       });
   };
 };
+
+export const fetchUserReservation = () => {
+  return (dispatch) => {
+    const userID = localStorage.getItem("userID");
+    const token = localStorage.getItem("user");
+    axios
+      .get(`http://localhost:8080/reservation?id=${userID}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        dispatch({ type: "GET_RESERVATION", payload: res });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: "GET__ERROR", err });
+      });
+  };
+};

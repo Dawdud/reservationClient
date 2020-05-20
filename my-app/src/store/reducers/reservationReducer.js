@@ -1,4 +1,4 @@
-const initState = {};
+const initState = { payload: "" };
 const reservationReducer = (state = initState, action) => {
   switch (action.type) {
     case "CREATE_RESERVATION":
@@ -6,6 +6,12 @@ const reservationReducer = (state = initState, action) => {
       return state;
     case "RESERVATION_ERROR":
       console.log("reservation error", action.err);
+      return state;
+    case "GET_RESERVATION":
+      console.log("get items", action);
+      return { ...state, payload: action.payload.data };
+    case "GET_ERROR":
+      console.log("error get", action.err);
       return state;
     default:
       return state;

@@ -20,6 +20,9 @@ const SignedInLinks = () => {
       <li>
         <NavLink to="/"></NavLink>
       </li>
+      <li>
+        <NavLink to="/create"> Create Reservation</NavLink>
+      </li>
     </ul>
   );
 };
