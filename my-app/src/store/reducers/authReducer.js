@@ -1,4 +1,4 @@
-const initState = {};
+const initState = { isLogout: false };
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case "LOGIN_ERROR":
@@ -11,6 +11,9 @@ const authReducer = (state = initState, action) => {
 
         authError: null,
       };
+    case "LOGOUT":
+      console.log("Log out");
+      return { ...state, isLogout: action.isLogout };
     case "SIGNUP_SUCCESS":
       console.log("signup success");
       return { ...state, authError: null };

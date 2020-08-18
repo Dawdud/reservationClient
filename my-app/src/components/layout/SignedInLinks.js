@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import { logOut } from "../../store/actions/authActions";
+import { connect } from "react-redux";
 
-const SignedInLinks = () => {
+const SignedInLinks = ({ logOut }) => {
   const loggedIn = localStorage.getItem("user");
   return (
     <ul className="right">
@@ -10,7 +12,7 @@ const SignedInLinks = () => {
           <Link
             to="/"
             onClick={(e) => {
-              localStorage.removeItem("user");
+              logOut();
             }}
           >
             Log Out
@@ -20,11 +22,20 @@ const SignedInLinks = () => {
       <li>
         <NavLink to="/"></NavLink>
       </li>
+
       <li>
-        <NavLink to="/create"> Create Reservation</NavLink>
+        {loggedIn ? <NavLink to="/create"> Create Reservation</NavLink> : null}
       </li>
     </ul>
   );
 };
 
-export default SignedInLinks;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logOut: () => dispatch(logOut()),
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignedInLinks);

@@ -18,7 +18,12 @@ export const signIn = (credentials, props) => {
       });
   };
 };
-
+export const logOut = () => {
+  return (dispatch, getstate) => {
+    localStorage.removeItem("user");
+    dispatch({ type: "LOGOUT", isLogout: true });
+  };
+};
 export const signUp = (newUser) => {
   return (dispatch, getstate) => {
     axios

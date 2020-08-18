@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 
-const Navbar = ({ auth }) => {
+const Navbar = ({ auth, isLogout }) => {
   const loggedIn = localStorage.getItem("user");
-  console.log(auth);
+  console.log(auth, isLogout);
   if (!loggedIn) {
     return (
       <nav className="nav">
@@ -38,6 +38,7 @@ const Navbar = ({ auth }) => {
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  isLogout: state.isLogout,
 });
 
 export default connect(mapStateToProps)(Navbar);
