@@ -1,20 +1,4 @@
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-
+html,
 body {
-  background-color: #f5f5f5;
-  -webkit-animation: bugfix infinite 1s;
-}
-@-webkit-keyframes bugfix {
-  from {
-    padding: 0;
-  }
-  to {
-    padding: 0;
-  }
+  height: 100%;
 }

@@ -4,7 +4,7 @@ import ProjectDetails from "../projects/ProjectDetails";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUserReservation } from "../../store/actions/reservationActions";
-
+import { Row, Col, Container } from "react-bootstrap";
 class Dashboard extends Component {
   state = {
     user: "",
@@ -19,27 +19,23 @@ class Dashboard extends Component {
     const items = [];
     let { reservations } = this.props;
 
-    for (let ser of reservations) {
+    for (let reservation of reservations) {
       items.push(
         <ProjectDetails
-          key={"ser" + ser.id}
-          id={ser.id}
-          name={ser.name}
-          guests={ser.guests}
-          startDate={ser.startdate}
+          key={"ser" + reservation.id}
+          id={reservation.id}
+          name={reservation.name}
+          guests={reservation.guests}
+          startDate={reservation.startdate}
+          endDate={reservation.enddate}
         />
       );
     }
 
     return (
-      <div className="container">
-        <div>items</div>
-        <div>
-          <nav></nav>
-        </div>
-        <div></div>
-        <div>{items}</div>
-      </div>
+      <Container>
+        <Row>{items}</Row>
+      </Container>
     );
   }
 }

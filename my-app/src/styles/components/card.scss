@@ -1,10 +1,8 @@
 @import "../utils/variables.scss";
-
 .container {
+  min-height: 90vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
-  min-height: 90vh;
 }

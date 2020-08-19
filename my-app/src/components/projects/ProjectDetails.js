@@ -1,19 +1,28 @@
 import React from "react";
+import { Row, Button, Col, Card } from "react-bootstrap";
+import { format } from "date-fns";
 
 const ProjectDetails = (props) => {
   const id = props.id;
   const name = props.name;
   const guests = props.guests;
   const startDate = props.startDate;
+  const endDate = props.endDate;
   return (
-    <div key={id + 0}>
-      <div key={id + 12}>
-        <p key={id + 1}> id:{id} </p>
-        <p key={id + 2}> name: {name} </p>
-        <p key={id + 3}> guests: {guests}</p>
-        <p key={id + 4}> startDate: {startDate}</p>
-      </div>
-    </div>
+    <Col xs={4}>
+      <Card>
+        <Card.Title>{name}</Card.Title>
+        <Card.Text>{guests}</Card.Text>
+        <Card.Text>{format(new Date(startDate), "yyyy-MM-dd")}</Card.Text>
+        <Card.Text>{format(new Date(endDate), "yyyy-MM-dd")}</Card.Text>
+        <Button variant="primary" type="submit">
+          Update
+        </Button>
+        <Button variant="primary" type="submit">
+          Delete
+        </Button>
+      </Card>
+    </Col>
   );
 };
 

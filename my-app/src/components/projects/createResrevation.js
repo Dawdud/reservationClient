@@ -23,24 +23,23 @@ class CreateReservation extends Component {
     this.props.createReservation(this.state);
   };
   handleChange(event) {
-    console.log(event.target.name);
     //  this.setState({ value: event.target.value });
 
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.id]: event.target.value });
   }
   render() {
     return (
       <Container>
         <Row>
           <Col>
-            <Card className="card--reservation">
+            <Card>
               <Card.Header>
                 <h5>Create Reservation</h5>
               </Card.Header>
               <Card.Body>
                 <Form onSubmit={this.handleSubmit}>
                   <Form.Row>
-                    <Form.Group controlId="name">
+                    <Form.Group as={Col} md="6" controlId="name">
                       <Form.Label> Name:</Form.Label>
 
                       <Form.Control
@@ -49,18 +48,17 @@ class CreateReservation extends Component {
                         placeholder="Enter Name"
                       />
                     </Form.Group>
-
-                    <Form.Group controlId="description">
-                      <Form.Label>Description:</Form.Label>
+                    <Form.Group as={Col} md="6" controlId="guests">
+                      <Form.Label> Enter number of guests:</Form.Label>
                       <Form.Control
-                        type="text"
-                        placeholder="Enter description:"
+                        type="number"
+                        placeholder="guests:"
                         onChange={this.handleChange}
                       />
                     </Form.Group>
                   </Form.Row>
                   <Form.Row>
-                    <Form.Group controlId="startdate">
+                    <Form.Group as={Col} md="6" controlId="startdate">
                       <Form.Label> Enter start date:</Form.Label>
 
                       <Form.Control
@@ -70,7 +68,7 @@ class CreateReservation extends Component {
                       />
                     </Form.Group>
 
-                    <Form.Group controlId="enddate">
+                    <Form.Group as={Col} md="6" controlId="enddate">
                       <Form.Label>Enter end Date:</Form.Label>
                       <Form.Control
                         type="date"
@@ -80,16 +78,16 @@ class CreateReservation extends Component {
                     </Form.Group>
                   </Form.Row>
 
-                  <Form.Group controlId="guests">
-                    <Form.Label> Enter number of guests:</Form.Label>
+                  <Form.Group controlId="description">
+                    <Form.Label>Description:</Form.Label>
                     <Form.Control
-                      type="number"
-                      placeholder="guests:"
+                      type="text"
+                      placeholder="Enter description:"
                       onChange={this.handleChange}
                     />
                   </Form.Group>
 
-                  <Button className="mb-6" variant="primary" type="submit">
+                  <Button variant="primary" type="submit">
                     Create Reservation
                   </Button>
                 </Form>
