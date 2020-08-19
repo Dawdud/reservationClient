@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 import { createReservation } from "../../store/actions/reservationActions";
+import { Row, Button, Form, Container, Col, Card } from "react-bootstrap";
 class CreateReservation extends Component {
   constructor() {
     super();
@@ -28,73 +29,75 @@ class CreateReservation extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
   render() {
-    let greeting;
-    if (this.state.isRegistered) {
-      greeting = (
-        <p>Hello {this.state.name}! You are sucessfully registered.</p>
-      );
-    } else {
-      greeting = "";
-    }
     return (
-      <div className="contaner">
-        <div className="row">
-          <h5>Reservation</h5>
-          <form onSubmit={this.handleSubmit}>
-            <div className="input-field col s12">
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={this.state.name}
-                onChange={this.handleChange}
-              ></input>
-              <label htmlFor="name">Name</label>
-            </div>
-            <div className="input-field col s12">
-              <input
-                type="text"
-                name="description"
-                value={this.state.description}
-                onChange={this.handleChange}
-              ></input>
-              <label htmlFor="name">description</label>
-            </div>
-            <div className="input-field col s12">
-              <input
-                type="date"
-                name="startdate"
-                id="startdate"
-                value={this.state.startdate}
-                onChange={this.handleChange}
-              ></input>
-              <label htmlFor="password">startDate</label>
-            </div>
-            <div className="input-field col s12">
-              <input
-                type="date"
-                name="enddate"
-                id="enddate"
-                value={this.state.enddate}
-                onChange={this.handleChange}
-              ></input>
-              <label htmlFor="enddate">endDate</label>
-            </div>
-            <div className="input-field col s12">
-              <input
-                type="number"
-                name="guests"
-                id="guests"
-                value={this.state.guests}
-                onChange={this.handleChange}
-              ></input>
-              <label htmlFor="guests">guest number</label>
-            </div>
-            <button>Accept reservation</button>
-          </form>
-          <div>{greeting}</div>
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <Card className="card--reservation">
+              <Card.Header>
+                <h5>Create Reservation</h5>
+              </Card.Header>
+              <Card.Body>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Row>
+                    <Form.Group controlId="name">
+                      <Form.Label> Name:</Form.Label>
+
+                      <Form.Control
+                        type="text"
+                        onChange={this.handleChange}
+                        placeholder="Enter Name"
+                      />
+                    </Form.Group>
+
+                    <Form.Group controlId="description">
+                      <Form.Label>Description:</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter description:"
+                        onChange={this.handleChange}
+                      />
+                    </Form.Group>
+                  </Form.Row>
+                  <Form.Row>
+                    <Form.Group controlId="startdate">
+                      <Form.Label> Enter start date:</Form.Label>
+
+                      <Form.Control
+                        type="date"
+                        onChange={this.handleChange}
+                        placeholder="Enter Start Date"
+                      />
+                    </Form.Group>
+
+                    <Form.Group controlId="enddate">
+                      <Form.Label>Enter end Date:</Form.Label>
+                      <Form.Control
+                        type="date"
+                        placeholder="End Date:"
+                        onChange={this.handleChange}
+                      />
+                    </Form.Group>
+                  </Form.Row>
+
+                  <Form.Group controlId="guests">
+                    <Form.Label> Enter number of guests:</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="guests:"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+
+                  <Button className="mb-6" variant="primary" type="submit">
+                    Create Reservation
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

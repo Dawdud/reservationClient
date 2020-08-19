@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import { Redirect } from "react-router-dom";
+import { Row, Button, Form, Container, Col, Card } from "react-bootstrap";
 class SignIn extends Component {
   constructor() {
     super();
@@ -24,34 +25,49 @@ class SignIn extends Component {
   };
   render() {
     return (
-      <div className="container">
-        <div className="card">
-          <form className="form" onSubmit={this.handleSubmit}>
-            <div className="form__info">
-              <h5 className="info">Log In</h5>
-            </div>
-            <div className="form__input">
-              <input
-                placeholder="Enter User Email "
-                type="email"
-                id="email"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form__input">
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form__button">
-              <button className="btn">SIGN IN</button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <Card>
+              <Card.Header>
+                <h5>Log In</h5>
+              </Card.Header>
+              <Card.Body>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Group controlId="email">
+                    <Form.Row>
+                      <Form.Label>Email address:</Form.Label>
+
+                      <Form.Control
+                        type="email"
+                        onChange={this.handleChange}
+                        placeholder="Enter email"
+                      />
+                    </Form.Row>
+                  </Form.Group>
+
+                  <Form.Group controlId="password">
+                    <Form.Row>
+                      <Form.Label>Password:</Form.Label>
+                      <Form.Control
+                        type="password"
+                        placeholder="Enter password"
+                        onChange={this.handleChange}
+                      />
+                    </Form.Row>
+                  </Form.Group>
+
+                  <Form.Row>
+                    <Button variant="primary" type="submit">
+                      Login
+                    </Button>
+                  </Form.Row>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
