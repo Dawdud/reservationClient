@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { signUp } from "../../store/actions/authActions";
 import { createReservation } from "../../store/actions/reservationActions";
 import { Row, Button, Form, Container, Col, Card } from "react-bootstrap";
+import ReservationForm from "../projects/ReservationForm";
 class CreateReservation extends Component {
   constructor() {
     super();
@@ -14,14 +14,8 @@ class CreateReservation extends Component {
       guests: "",
       userId: "",
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleSubmit = (e) => {
-    e.preventDefault();
 
-    this.props.createReservation(this.state);
-  };
   handleChange(event) {
     //  this.setState({ value: event.target.value });
 
@@ -37,60 +31,11 @@ class CreateReservation extends Component {
                 <h5>Create Reservation</h5>
               </Card.Header>
               <Card.Body>
-                <Form onSubmit={this.handleSubmit}>
-                  <Form.Row>
-                    <Form.Group as={Col} md="6" controlId="name">
-                      <Form.Label> Name:</Form.Label>
-
-                      <Form.Control
-                        type="text"
-                        onChange={this.handleChange}
-                        placeholder="Enter Name"
-                      />
-                    </Form.Group>
-                    <Form.Group as={Col} md="6" controlId="guests">
-                      <Form.Label> Enter number of guests:</Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder="guests:"
-                        onChange={this.handleChange}
-                      />
-                    </Form.Group>
-                  </Form.Row>
-                  <Form.Row>
-                    <Form.Group as={Col} md="6" controlId="startdate">
-                      <Form.Label> Enter start date:</Form.Label>
-
-                      <Form.Control
-                        type="date"
-                        onChange={this.handleChange}
-                        placeholder="Enter Start Date"
-                      />
-                    </Form.Group>
-
-                    <Form.Group as={Col} md="6" controlId="enddate">
-                      <Form.Label>Enter end Date:</Form.Label>
-                      <Form.Control
-                        type="date"
-                        placeholder="End Date:"
-                        onChange={this.handleChange}
-                      />
-                    </Form.Group>
-                  </Form.Row>
-
-                  <Form.Group controlId="description">
-                    <Form.Label>Description:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter description:"
-                      onChange={this.handleChange}
-                    />
-                  </Form.Group>
-
-                  <Button variant="primary" type="submit">
-                    Create Reservation
-                  </Button>
-                </Form>
+                <ReservationForm
+                  formAction={this.props.createReservation}
+                  mode="create"
+                  buttonText="create reservation"
+                ></ReservationForm>
               </Card.Body>
             </Card>
           </Col>

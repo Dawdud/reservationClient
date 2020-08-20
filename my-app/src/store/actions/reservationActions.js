@@ -21,6 +21,31 @@ export const createReservation = (reservation) => {
   };
 };
 
+export const updateReservation = (reservation, reservationId) => {
+  return (dispatch, getState) => {
+    const token = localStorage.getItem("user");
+    const userId = localStorage.getItem("userID");
+    reservation.userId = userId;
+    console.log(reservation);
+    axios
+      .put(
+        `http://localhost:8080/updateReservation?id=${reservationId}`,
+        reservation,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: "UPDATE_RESERVATION" });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: "UPDATE_ERROR", err });
+      });
+  };
+};
+
 export const fetchUserReservation = () => {
   return (dispatch) => {
     const userID = localStorage.getItem("userID");

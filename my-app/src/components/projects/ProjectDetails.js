@@ -1,29 +1,76 @@
-import React from "react";
+import React, { Component } from "react";
+import Modal from "../layout/Modal";
 import { Row, Button, Col, Card } from "react-bootstrap";
 import { format } from "date-fns";
+import ReservationForm from "../projects/ReservationForm";
+import { connect } from "react-redux";
+import { updateReservation } from "../../store/actions/reservationActions";
 
-const ProjectDetails = (props) => {
-  const id = props.id;
-  const name = props.name;
-  const guests = props.guests;
-  const startDate = props.startDate;
-  const endDate = props.endDate;
-  return (
-    <Col xs={4}>
-      <Card>
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>{guests}</Card.Text>
-        <Card.Text>{format(new Date(startDate), "yyyy-MM-dd")}</Card.Text>
-        <Card.Text>{format(new Date(endDate), "yyyy-MM-dd")}</Card.Text>
-        <Button variant="primary" type="submit">
-          Update
-        </Button>
-        <Button variant="primary" type="submit">
-          Delete
-        </Button>
-      </Card>
-    </Col>
-  );
+class ProjectDetails extends Component {
+  state = {
+    show: false,
+    reservationData: {},
+  };
+  showModal = () => {
+    this.setState({ show: true });
+    console.log(true, "Open Modal!!!!");
+  };
+  hideModal = () => {
+    this.setState({ show: false });
+    console.log(false, "Close Modal!!!!");
+  };
+  handleSubmit() {
+    console.log("submit");
+  }
+
+  handleChange() {
+    console.log("change");
+  }
+  render() {
+    const reservationData = {
+      name: this.props.name,
+      guests: this.props.guests,
+      startDate: this.props.startDate,
+      endDate: this.props.endDate,
+      description: this.props.description,
+    };
+    return (
+      <Col xs={4}>
+        <Card>
+          <Card.Title>{this.props.name}</Card.Title>
+          <Card.Text> guests: {this.props.guests}</Card.Text>
+          <Card.Text>
+            start date: {format(new Date(this.props.startDate), "yyyy-MM-dd")}
+          </Card.Text>
+          <Card.Text>
+            end Date: {format(new Date(this.props.endDate), "yyyy-MM-dd")}
+          </Card.Text>
+          <Modal handleClose={this.hideModal} show={this.state.show}>
+            <ReservationForm
+              formAction={this.props.updateReservation}
+              mode="edit"
+              reservationData={reservationData}
+              buttonText="Edit reservation"
+              reservationId={this.props.id}
+            ></ReservationForm>
+          </Modal>
+
+          <Button variant="primary" type="submit" onClick={this.showModal}>
+            Update
+          </Button>
+        </Card>
+      </Col>
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateReservation: (reservation, reservationId) =>
+      dispatch(updateReservation(reservation, reservationId)),
+  };
 };
-
-export default ProjectDetails;
+export default connect(
+  null,
+  mapDispatchToProps
+)(ProjectDetails);

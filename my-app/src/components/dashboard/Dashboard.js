@@ -28,6 +28,7 @@ class Dashboard extends Component {
           guests={reservation.guests}
           startDate={reservation.startdate}
           endDate={reservation.enddate}
+          description={reservation.description}
         />
       );
     }
