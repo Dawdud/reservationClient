@@ -1,4 +1,4 @@
-const initState = { payload: "" };
+const initState = { payload: "", update: "" };
 const reservationReducer = (state = initState, action) => {
   switch (action.type) {
     case "CREATE_RESERVATION":
@@ -19,7 +19,7 @@ const reservationReducer = (state = initState, action) => {
       return state;
     case "UPDATE_RESERVATION":
       console.log("reservation updated");
-      return state;
+      return { ...state, update: action.update.data };
 
     default:
       return state;

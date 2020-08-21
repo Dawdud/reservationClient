@@ -37,7 +37,7 @@ export const updateReservation = (reservation, reservationId) => {
       )
       .then((res) => {
         console.log(res);
-        dispatch({ type: "UPDATE_RESERVATION" });
+        dispatch({ type: "UPDATE_RESERVATION", update: res });
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +52,7 @@ export const fetchUserReservation = () => {
     const token = localStorage.getItem("user");
     axios
       .get(`http://localhost:8080/reservation?id=${userID}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}`, update: true },
       })
       .then((res) => {
         dispatch({ type: "GET_RESERVATION", payload: res });

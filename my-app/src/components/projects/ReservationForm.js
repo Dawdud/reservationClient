@@ -12,18 +12,17 @@ class ReservationForm extends Component {
   };
 
   componentDidMount() {
-    const {
-      name,
-      guests,
-      endDate,
-      startDate,
-      description,
-    } = this.props.reservationData;
-    console.log(startDate);
-    const formatEndDate = format(new Date(endDate), "yyyy-MM-dd");
-    const formatStartDate = format(new Date(startDate), "yyyy-MM-dd");
-
     if (this.props.mode === "edit") {
+      const {
+        name,
+        guests,
+        endDate,
+        startDate,
+        description,
+      } = this.props.reservationData;
+      console.log(startDate);
+      const formatEndDate = format(new Date(endDate), "yyyy-MM-dd");
+      const formatStartDate = format(new Date(startDate), "yyyy-MM-dd");
       this.setState({
         name,
         guests,
@@ -106,8 +105,12 @@ class ReservationForm extends Component {
           />
         </Form.Group>
         {
-          <Button variant="primary" type="submit">
-            test
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={this.props.hideModal}
+          >
+            Update reservation
           </Button>
         }
       </Form>

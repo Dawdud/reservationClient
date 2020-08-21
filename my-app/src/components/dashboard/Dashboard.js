@@ -14,6 +14,12 @@ class Dashboard extends Component {
     this.props.fetchUserReservation();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.update !== this.props.update) {
+      this.props.fetchUserReservation();
+      console.log("update state");
+    }
+  }
   render() {
     if (!localStorage.getItem("user")) return <Redirect to="/signin" />;
     const items = [];
@@ -48,6 +54,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 const mapStateToProps = (state) => ({
   reservations: state.reservation.payload,
+  update: state.reservation.update,
 });
 export default connect(
   mapStateToProps,

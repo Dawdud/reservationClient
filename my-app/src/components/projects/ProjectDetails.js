@@ -49,6 +49,7 @@ class ProjectDetails extends Component {
             <ReservationForm
               formAction={this.props.updateReservation}
               mode="edit"
+              hideModal={this.hideModal}
               reservationData={reservationData}
               buttonText="Edit reservation"
               reservationId={this.props.id}
